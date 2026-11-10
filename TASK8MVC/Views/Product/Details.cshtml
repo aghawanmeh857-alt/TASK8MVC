@@ -1,0 +1,16 @@
+﻿@model TASK8MVC.Models.Product
+
+<h2>Product Details</h2>
+
+<dl>
+    <dt>Name</dt>
+    <dd>@Model.Name</dd>
+    <dt>Description</dt>
+    <dd>@Model.Description</dd>
+    <dt>Price</dt>
+    <dd>@Model.Price</dd>
+    <dt>Available Quantity</dt>
+    <dd>@Model.Quantity</dd>
+</dl>
+
+<a asp-action="Index">Back to Products</a>

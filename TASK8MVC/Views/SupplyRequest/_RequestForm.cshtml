@@ -1,0 +1,38 @@
+@model TASK8MVC.Models.SupplyRequest
+@{
+    var products = (List<TASK8MVC.Models.Product>)ViewBag.Products;
+    var items = Model.RequestItems;
+    var rowCount = Math.Max(items.Count, 1);
+}
+<div asp-validation-summary="All" class="text-danger"></div>
+<p>Select products and quantities. Use Add Product to include more than one product.</p>
+<table class="table">
+    <thead><tr><th>Product / Unit Price / Available Quantity</th><th>Quantity</th><th></th></tr></thead>
+    <tbody id="request-items">
+    @for (int i = 0; i < rowCount; i++)
+    {
+        <tr>
+            <td><select name="productIds" class="form-select" required>
+                <option value="">Select a product</option>
+                @foreach (var product in products)
+                {
+                    if (i < items.Count && items[i].ProductId == product.Id)
+                    {
+                        <option value="@product.Id" selected>@product.Name / @product.Price.ToString("F2") / @product.Quantity available</option>
+                    }
+                    else
+                    {
+                        <option value="@product.Id">@product.Name / @product.Price.ToString("F2") / @product.Quantity available</option>
+                    }
+                }
+            </select></td>
+            <td><input class="form-control" name="quantities" type="number" min="1" max="1000000" value="@(i < items.Count ? items[i].Quantity : 1)" required /></td>
+            <td><button type="button" class="btn btn-outline-danger remove-item">Remove</button></td>
+        </tr>
+    }
+    </tbody>
+</table>
+<button type="button" id="add-item" class="btn btn-secondary">Add Product</button>
+<button type="submit" class="btn btn-primary">Save Request</button>
+<a asp-action="Index">Back to Requests</a>
+@if (products.Count == 0) { <p>No products are available. Ask an administrator to add products.</p> }

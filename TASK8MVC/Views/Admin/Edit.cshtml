@@ -1,0 +1,19 @@
+@model Microsoft.AspNetCore.Identity.IdentityUser
+@using Microsoft.AspNetCore.Identity
+<h2>Change Role</h2>
+<p>@Model.Email</p>
+<p>Current roles: @string.Join(", ", (IEnumerable<string>)ViewBag.CurrentRoles)</p>
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" name="id" value="@Model.Id" />
+    <label for="roleId">Role</label>
+    <select id="roleId" name="roleId" class="form-select" required>
+        <option value="">Select a role</option>
+        @foreach (IdentityRole role in ViewBag.Roles)
+        {
+            <option value="@role.Id">@role.Name</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+    <a asp-action="Index">Cancel</a>
+</form>

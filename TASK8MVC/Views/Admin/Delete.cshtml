@@ -1,0 +1,9 @@
+@model Microsoft.AspNetCore.Identity.IdentityUser
+<h2>Delete User</h2>
+<p>Delete @Model.Email and their supply requests?</p>
+<form asp-action="Delete" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index">Cancel</a>
+</form>

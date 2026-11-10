@@ -1,0 +1,24 @@
+@model IEnumerable<TASK8MVC.Models.SupplyRequest>
+<h2>Supply Requests</h2>
+<p><a asp-action="Create">Create Request</a></p>
+<table class="table">
+    <thead><tr><th>Request</th><th>Date</th><th>Total Price</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var request in Model)
+    {
+        <tr>
+            <td>@request.Id</td><td>@request.RequestDate.ToString("yyyy-MM-dd HH:mm")</td>
+            <td>@request.TotalPrice.ToString("F2")</td><td>@request.Status</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@request.Id">Details</a>
+                @if (request.Status == "Pending")
+                {
+                    <a asp-action="Edit" asp-route-id="@request.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@request.Id">Delete</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@if (!Model.Any()) { <p>No supply requests yet.</p> }

@@ -1,0 +1,24 @@
+@model TASK8MVC.Models.SupplyRequest
+<h2>Request #@Model.Id</h2>
+<p>Date: @Model.RequestDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p>Status: <strong>@Model.Status</strong></p>
+<p>Requested by: @Model.UserId</p>
+<table class="table">
+    <thead><tr><th>Product</th><th>Quantity</th><th>Unit Price</th><th>Subtotal</th></tr></thead>
+    <tbody>
+    @foreach (var item in Model.RequestItems)
+    {
+        <tr><td>@item.Product.Name</td><td>@item.Quantity</td><td>@item.Price.ToString("F2")</td><td>@((item.Price * item.Quantity).ToString("F2"))</td></tr>
+    }
+    </tbody>
+</table>
+<p>Total Price: <strong>@Model.TotalPrice.ToString("F2")</strong></p>
+@if (Model.Status == "Pending" && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+{
+    <form asp-action="ChangeStatus" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button name="status" value="Approved" class="btn btn-success">Approve</button>
+        <button name="status" value="Rejected" class="btn btn-danger">Reject</button>
+    </form>
+}
+<a asp-action="Index">Back to Requests</a>

@@ -1,0 +1,9 @@
+@model TASK8MVC.Models.SupplyRequest
+<h2>Edit Supply Request</h2>
+<form asp-action="Edit" method="post">
+    @if (Model != null && Model.Id != 0) { <input type="hidden" name="id" value="@Model.Id" /> }
+    <partial name="_RequestForm" model="@(Model ?? new TASK8MVC.Models.SupplyRequest())" />
+</form>
+@section Scripts {
+    <script src="~/js/request-form.js" asp-append-version="true"></script>
+}

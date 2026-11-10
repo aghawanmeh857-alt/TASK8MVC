@@ -1,0 +1,9 @@
+@model TASK8MVC.Models.SupplyRequest
+<h2>Delete Request #@Model.Id</h2>
+<p>Delete this pending supply request and all its items?</p>
+<p>Total Price: @Model.TotalPrice.ToString("F2")</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index">Cancel</a>
+</form>

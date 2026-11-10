@@ -1,0 +1,8 @@
+@{ ViewData["Title"] = "University Cafeteria"; }
+<h1>University Cafeteria Supply Requests</h1>
+<p>Browse products, submit supply requests, and track their status.</p>
+<a class="btn btn-primary" asp-controller="Product" asp-action="Index">View Products</a>
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <a class="btn btn-outline-primary" asp-controller="SupplyRequest" asp-action="Index">My Requests</a>
+}

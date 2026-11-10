@@ -1,0 +1,17 @@
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.mdf
+*.ldf
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+**/secrets.json
+**/appsettings.Local.json
+**/Properties/PublishProfiles/
